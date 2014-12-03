@@ -166,7 +166,7 @@ class ViewTreeScanner {
         }
     }
 
-    private void processZipFile(File file, ClassFileVisitor visitor, int flag) {
+    private static void processZipFile(File file, ClassFileVisitor visitor, int flag) {
         ZipFile zipFile = new ZipFile(file)
         try {
             Enumeration<? extends ZipEntry> entries = zipFile.entries()
@@ -184,7 +184,7 @@ class ViewTreeScanner {
         }
     }
 
-    private void processInputStream(File file, InputStream inputStream, ClassFileVisitor visitor, int flag) {
+    private static void processInputStream(File file, InputStream inputStream, ClassFileVisitor visitor, int flag) {
         try {
             ClassReader reader = new ClassReader(inputStream)
             visitor.setFile(file)
