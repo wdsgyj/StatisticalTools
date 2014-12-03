@@ -1,13 +1,10 @@
 package com.baidu.statools.scanner
-
 import com.baidu.statools.util.Tree
 import org.apache.commons.io.IOUtils
 import org.objectweb.asm.ClassReader
-import org.objectweb.asm.ClassVisitor
 
 import java.util.zip.ZipEntry
 import java.util.zip.ZipFile
-
 /**
  * Created by clark on 14-11-28.
  */
@@ -136,7 +133,7 @@ class ViewTreeScanner {
         return res
     }
 
-    private void findViewinfos(ClassVisitor visitor, int flag) {
+    private void findViewinfos(ClassFileVisitor visitor, int flag) {
         if (!files) {
             return
         }
@@ -169,7 +166,7 @@ class ViewTreeScanner {
         }
     }
 
-    private void processZipFile(File file, ClassVisitor visitor, int flag) {
+    private void processZipFile(File file, ClassFileVisitor visitor, int flag) {
         ZipFile zipFile = new ZipFile(file)
         try {
             Enumeration<? extends ZipEntry> entries = zipFile.entries()
