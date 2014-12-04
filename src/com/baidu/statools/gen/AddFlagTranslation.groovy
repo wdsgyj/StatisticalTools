@@ -17,7 +17,7 @@ class AddFlagTranslation implements Translation<LayoutFile, File> {
     final AtomicLong sAutoFlags = new AtomicLong(0)
 
     AddFlagTranslation (Set<Integer> flags) {
-        alreadyHave << flags
+        alreadyHave.addAll(flags)
     }
 
     @Override

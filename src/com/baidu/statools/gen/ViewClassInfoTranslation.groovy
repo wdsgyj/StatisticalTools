@@ -13,14 +13,12 @@ class ViewClassInfoTranslation implements Translation<ViewClassBean, File> {
                 .toString().replace((char) '.', (char) '/'))
         outputFile.parentFile.mkdirs()
         OutputStream outputStream = new FileOutputStream(outputFile)
-        String className = src.name
-        String superClassName = src.superClassName
-        String template
         try {
-            IOUtils.write(src.isAdapterView ?
-                    TemplateCodes.ADAPTER_VIEW_TEMPLATE
-                    : TemplateCodes.NORMAL_VIEW_TEMPLATE,
-                    outputStream, 'UTF-8')
+            if (src.isAdapterView) {
+                IOUtils.write(TemplateCodes.getAdapterViewTemplate(src.name, src.superClassName), outputStream, 'UTF-8')
+            } else {
+                IOUtils.write(TemplateCodes.getViewTemplate(src.name, src.superClassName), outputStream, 'UTF-8')
+            }
         } finally {
             IOUtils.closeQuietly(outputStream)
         }

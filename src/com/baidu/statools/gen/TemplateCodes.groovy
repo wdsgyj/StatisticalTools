@@ -9,7 +9,8 @@ import org.dom4j.QName
  */
 class TemplateCodes {
 
-    static final String ADAPTER_VIEW_TEMPLATE = '''\
+    static String getAdapterViewTemplate(String className, String superClassName) {
+        return '''\
 package com.baidu.baidumaps.statistics;
 
 import android.content.Context;
@@ -46,8 +47,10 @@ public class $className extends $superClassName {
     }
 }\
 '''
+    }
 
-    static final String NORMAL_VIEW_TEMPLATE = '''\
+    static String getViewTemplate(String className, String superClassName) {
+        return '''\
 package com.baidu.baidumaps.statistics;
 
 import android.content.Context;
@@ -84,8 +87,9 @@ public class $className extends $superClassName {
     }
 }\
 '''
+    }
 
-    static final String CLICK_ACTION_SOURCECODE = '''\
+    private static final String CLICK_ACTION_SOURCECODE = '''\
 package com.baidu.baidumaps.statistics;
 
 import android.view.View;
@@ -108,7 +112,7 @@ abstract class ClickAction implements View.OnClickListener {
 }\
 '''
 
-    static final String ITEM_CLICK_ACTION_SOURCECODE = '''\
+    private static final String ITEM_CLICK_ACTION_SOURCECODE = '''\
 package com.baidu.baidumaps.statistics;
 
 import android.view.View;
@@ -132,7 +136,7 @@ abstract class ItemClickAction implements AdapterView.OnItemClickListener {
 }\
 '''
 
-    static final String STATISTICS_HELPER_SOURCECODE = '''\
+    private static final String STATISTICS_HELPER_SOURCECODE = '''\
 package com.baidu.baidumaps.statistics;
 
 import android.content.Context;
@@ -207,8 +211,8 @@ class StatisticsHelper {
             genDirs.mkdirs()
         }
 
-        InputStream input;
-        OutputStream output;
+        InputStream input = null;
+        OutputStream output = null;
 
         try {
             input = new ByteArrayInputStream(CLICK_ACTION_SOURCECODE.getBytes('UTF-8'))
@@ -238,7 +242,7 @@ class StatisticsHelper {
         }
     }
 
-    static final String baiduMapNameSpace = new Namespace('baidu', 'http://schemas.android.com/apk/res/com.baidu.BaiduMap')
+    static final Namespace baiduMapNameSpace = new Namespace('baidu', 'http://schemas.android.com/apk/res/com.baidu.BaiduMap')
     static final String baiduMapFlag = new QName('flag', baiduMapNameSpace)
 
     static void main(String[] args) {
