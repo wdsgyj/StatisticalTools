@@ -17,6 +17,26 @@ class LayoutFileScanner {
         layoutFiles.addAll(files)
     }
 
+    LayoutFileScanner(File dir) {
+        File[] children = dir.listFiles()
+        if (children) {
+            LinkedList<File> fs = new LinkedList<>()
+            fs.addAll(children.toList())
+
+            while (fs.size() > 0) {
+                File f = fs.removeFirst()
+                if (f.isFile()) {
+                    layoutFiles << f
+                } else if (f.isDirectory()) {
+                    children = f.listFiles()
+                    if (children) {
+                        fs.addAll(0, children.toList())
+                    }
+                }
+            }
+        }
+    }
+
     private Set<Integer> scannerFlags() {
         Set<Integer> rs = new HashSet<>()
         SAXReader reader = new SAXReader()
@@ -41,5 +61,9 @@ class LayoutFileScanner {
             }
         }
         return rs
+    }
+
+    Set<Integer> getAlreadyHaveFlags() {
+        return scannerFlags()
     }
 }

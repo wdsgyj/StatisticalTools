@@ -1,17 +1,11 @@
 package com.baidu.statools
 
-import com.baidu.statools.gen.TemplateCodes
 import com.baidu.statools.scanner.ViewTreeScanner
 import com.baidu.statools.util.Tree
 import groovyjarjarcommonscli.BasicParser
 import groovyjarjarcommonscli.CommandLine
 import groovyjarjarcommonscli.Options
 import groovyjarjarcommonscli.Parser
-import org.dom4j.Attribute
-import org.dom4j.Document
-import org.dom4j.Element
-import org.dom4j.io.SAXReader
-
 /**
  * Created by clark on 14-12-3.
  */
@@ -58,19 +52,13 @@ class Main {
         }
         println("View 名称转换表 $nameTable")
 
-        SAXReader reader = new SAXReader()
         paths.each { layoutPath ->
             File layoutFile = new File(layoutPath)
             if (!layoutFile || !layoutFile.isDirectory()) {
                 return
             }
 
-            Document document = reader.read(layoutFile)
-            Element root = document.rootElement
-            Attribute attr = root.attribute(TemplateCodes.baiduMapFlag)
-            if (attr) {
 
-            }
         }
     }
 }
