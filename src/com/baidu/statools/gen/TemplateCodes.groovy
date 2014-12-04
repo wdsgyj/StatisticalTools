@@ -243,7 +243,7 @@ class StatisticsHelper {
     }
 
     static final Namespace baiduMapNameSpace = new Namespace('baidu', 'http://schemas.android.com/apk/res/com.baidu.BaiduMap')
-    static final String baiduMapFlag = new QName('flag', baiduMapNameSpace)
+    static final QName baiduMapFlag = new QName('flag', baiduMapNameSpace)
 
     static void main(String[] args) {
         generatorHelpSource('/home/clark/dev/android/clark/AndroidStat/src' as File)
